@@ -72,8 +72,13 @@ import { Factory } from './factory';
 import { Parser } from './parser';
 import { EasyScore } from './easyscore';
 import { Registry } from './registry';
+import { SVGContext } from './svgcontext';
+import { Tickable } from './tickable';
 
 Vex.Flow = Flow;
+Vex.Flow.SVGContext = SVGContext;
+Vex.Flow.Tickable = Tickable;
+
 Vex.Flow.Element = Element;
 Vex.Flow.Fraction = Fraction;
 Vex.Flow.Renderer = Renderer;
