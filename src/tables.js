@@ -472,7 +472,7 @@ Flow.parseNoteData = noteData => {
   }
 
   let type = noteData.type;
-
+  if (!type) type = noteData.note_type
   if (type) {
     if (!(type === 'n' || type === 'r' || type === 'h' || type === 'm' || type === 's')) {
       return null;
@@ -563,6 +563,7 @@ Flow.durationToTicks.durations = {
   '64': Flow.RESOLUTION / 64,
   '128': Flow.RESOLUTION / 128,
   '256': Flow.RESOLUTION / 256,
+  '512': Flow.RESOLUTION / 512,
 };
 
 Flow.durationAliases = {

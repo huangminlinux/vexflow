@@ -485,7 +485,7 @@ export class Formatter {
 
     contextList.forEach((tick, index) => {
       const prevTick = contextList[index - 1] || 0;
-      const context = contextMap[tick];
+      const context = contextMap[tick]; // tickContext
       const tickSpace = (tick - prevTick) * leftoverPxPerTick;
 
       spaceAccum += tickSpace;

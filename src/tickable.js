@@ -16,7 +16,7 @@ export class Tickable extends Element {
 
     // These properties represent the duration of
     // this tickable element.
-    this.ticks = new Fraction(0, 1);
+    this.ticks = new Fraction(0, 1); // 分数
     this.intrinsicTicks = 0;
     this.tickMultiplier = new Fraction(1, 1);
 

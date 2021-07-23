@@ -50,7 +50,9 @@ export class GraceNote extends StaveNote {
   }
 
   draw() {
+    this.context.openGroup('grace-note');
     super.draw();
+    this.context.closeGroup();
     this.setRendered();
     const stem = this.stem;
     if (this.slash && stem) {
