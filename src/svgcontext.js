@@ -40,10 +40,21 @@ export class SVGContext {
     // Add it to the canvas:
     this.element.appendChild(svg);
 
+    (new Array(5).fill(0)).forEach((_, i) => {
+      
+        const layerDivider = document.createElementNS(this.svgNS, "g"); //to create a circle. for rectangle use 'rectangle'
+        layerDivider.id = `layer-divider-${i}`;
+        svg.appendChild(layerDivider);
+    })
+
+    this.vexflowLayerG = document.getElementById('layer-divider-1');
+
+
     // Point to it:
     this.svg = svg;
-    this.groups = [this.svg]; // Create the group stack
-    this.parent = this.svg;
+    // this.groups = [this.svg]; // Create the group stack
+    this.groups = [this.vexflowLayerG]; // Create the group stack
+    this.parent = this.vexflowLayerG;
 
     this.path = '';
     this.pen = { x: NaN, y: NaN };
@@ -393,7 +404,9 @@ export class SVGContext {
   }
 
   // ## Paths:
-
+  round(number, precision) {
+    return Math.round(+(number + 'e' + precision)) / Math.pow(10, precision);
+  } 
   beginPath() {
     this.path = '';
     this.pen.x = NaN;
@@ -402,6 +415,8 @@ export class SVGContext {
   }
 
   moveTo(x, y) {
+    x = this.round(x, 2);
+    y = this.round(y, 2);
     this.path += 'M' + x + ' ' + y;
     this.pen.x = x;
     this.pen.y = y;
@@ -409,6 +424,8 @@ export class SVGContext {
   }
 
   lineTo(x, y) {
+    x = this.round(x, 2);
+    y = this.round(y, 2);
     this.path += 'L' + x + ' ' + y;
     this.pen.x = x;
     this.pen.y = y;
@@ -416,6 +433,13 @@ export class SVGContext {
   }
 
   bezierCurveTo(x1, y1, x2, y2, x, y) {
+    x = this.round(x, 2);
+    y = this.round(y, 2);
+    x1 = this.round(x1, 2);
+    y1 = this.round(y1, 2);
+    x2 = this.round(x2, 2);
+    y2 = this.round(y2, 2);
+
     this.path += 'C' +
       x1 + ' ' +
       y1 + ',' +
@@ -429,6 +453,11 @@ export class SVGContext {
   }
 
   quadraticCurveTo(x1, y1, x, y) {
+    x = this.round(x, 2);
+    y = this.round(y, 2);
+    x1 = this.round(x1, 2);
+    y1 = this.round(y1, 2);
+
     this.path += 'Q' +
       x1 + ' ' +
       y1 + ',' +

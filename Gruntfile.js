@@ -88,36 +88,36 @@ module.exports = (grunt) => {
       }),
     },
     uglify: {
-      options: {
-        banner: BANNER,
-        sourceMap: true,
-      },
-      build: {
-        files: [
-          {
-            expand: true,
-            cwd: BUILD_DIR,
-            src: TARGET_RAW,
-            dest: BUILD_DIR,
-            rename: function (dst) {
-              return path.join(dst, TARGET_MIN);
-            }
-          }
-        ],
-      },
-      buildLegacy: {
-        files: [
-          {
-            expand: true,
-            cwd: BUILD_DIR,
-            src: TARGET_LEGACY_RAW,
-            dest: BUILD_DIR,
-            rename: function (dst) {
-              return path.join(dst, TARGET_LEGACY_MIN);
-            }
-          }
-        ],
-      },
+      // options: {
+      //   banner: BANNER,
+      //   sourceMap: true,
+      // },
+      // build: {
+      //   files: [
+      //     {
+      //       expand: true,
+      //       cwd: BUILD_DIR,
+      //       src: TARGET_RAW,
+      //       dest: BUILD_DIR,
+      //       rename: function (dst) {
+      //         return path.join(dst, TARGET_MIN);
+      //       }
+      //     }
+      //   ],
+      // },
+      // buildLegacy: {
+      //   files: [
+      //     {
+      //       expand: true,
+      //       cwd: BUILD_DIR,
+      //       src: TARGET_LEGACY_RAW,
+      //       dest: BUILD_DIR,
+      //       rename: function (dst) {
+      //         return path.join(dst, TARGET_LEGACY_MIN);
+      //       }
+      //     }
+      //   ],
+      // },
     },
     eslint: {
       target: SOURCES.concat('./tests'),
@@ -187,7 +187,7 @@ module.exports = (grunt) => {
 
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
+  // grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -200,8 +200,8 @@ module.exports = (grunt) => {
   grunt.loadNpmTasks('grunt-webpack');
 
   // Default task(s).
-  grunt.registerTask('default', ['eslint', 'webpack:build', 'concat', 'uglify:build', 'docco']);
-  grunt.registerTask('buildLegacy', ['webpack:buildLegacy', 'uglify:buildLegacy']);
+  grunt.registerTask('default', ['eslint', 'webpack:build', 'concat',  'docco']);
+  grunt.registerTask('buildLegacy', ['webpack:buildLegacy']);
   grunt.registerTask('test', 'Run qunit tests.', ['webpack:build', 'concat', 'qunit']);
 
   // Release current build.
