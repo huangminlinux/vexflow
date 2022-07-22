@@ -564,6 +564,7 @@ Flow.durationToTicks.durations = {
   '128': Flow.RESOLUTION / 128,
   '256': Flow.RESOLUTION / 256,
   '512': Flow.RESOLUTION / 512,
+  '1024': Flow.RESOLUTION / 1024,
 };
 
 Flow.durationAliases = {
