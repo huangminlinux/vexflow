@@ -56,7 +56,8 @@ export class StaveTempo extends StaveModifier {
       x += ctx.measureText(name).width;
     }
 
-    if (duration && bpm) {
+    // if (duration && bpm) {
+    if (duration) {
       ctx.setFont(font.family, font.size, 'normal');
 
       if (name) {
@@ -97,7 +98,44 @@ export class StaveTempo extends StaveModifier {
         ctx.fill();
       }
 
-      ctx.fillText(' = ' + bpm + (name ? ')' : ''), x + 3 * scale, y);
+
+      if (this.tempo.toIsBeat) {
+        ctx.fillText(' = ', x + 3 * scale, y);
+        x += 3 * scale
+
+        x += 12;
+        console.error('tempo the code', code);
+        const code = Flow.durationToGlyph(this.tempo.toDuration);
+
+
+        Glyph.renderGlyph(ctx, x, y, options.glyph_font_scale, code.code_head);
+        x += code.getWidth() * scale;
+
+        // Draw stem and flags
+        if (code.stem) {
+          let stem_height = 30;
+          if (code.beam_count) stem_height += 3 * (code.beam_count - 1);
+
+          stem_height *= scale;
+
+          const y_top = y - stem_height;
+          ctx.fillRect(x - scale, y_top, scale, stem_height);
+
+          if (code.flag) {
+            Glyph.renderGlyph(ctx, x, y_top, options.glyph_font_scale, code.code_flag_upstem);
+            if (!dots) x += 6 * scale;
+          }
+        }
+
+        for (let i = 0; i < this.tempo.toDots; i++) {
+          x += 6 * scale;
+          ctx.beginPath();
+          ctx.arc(x, y + 2 * scale, 2 * scale, 0, Math.PI * 2, false);
+          ctx.fill();
+        }
+      } else {
+        ctx.fillText(' = ' + bpm + (name ? ')' : ''), x + 3 * scale, y);
+      }
     }
 
     ctx.restore();

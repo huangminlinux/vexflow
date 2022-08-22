@@ -152,12 +152,14 @@ export class Stem extends Element {
     // Draw the stem
     ctx.save();
     this.applyStyle(ctx);
+    this.setAttribute('el', this.context.openGroup('stem'));
     ctx.beginPath();
     ctx.setLineWidth(Stem.WIDTH);
     ctx.moveTo(stem_x, stem_y - stemletYOffset);
     ctx.lineTo(stem_x, stem_y - stemHeight - (this.renderHeightAdjustment * stem_direction));
     ctx.stroke();
     this.restoreStyle(ctx);
+    this.context.closeGroup();
     ctx.restore();
   }
 }

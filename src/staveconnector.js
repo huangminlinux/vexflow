@@ -118,6 +118,8 @@ export class StaveConnector extends Element {
 
   draw() {
     const ctx = this.checkContext();
+    ctx.openGroup('stave-connector');
+    
     this.setRendered();
 
     let topY = this.top_stave.getYForLine(0);
@@ -237,5 +239,6 @@ export class StaveConnector extends Element {
       ctx.fillText('' + text.content, x, y + 4);
     }
     ctx.restore();
+    ctx.closeGroup();
   }
 }

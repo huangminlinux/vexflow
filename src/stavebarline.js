@@ -119,7 +119,9 @@ export class Barline extends StaveModifier {
 
   // Draw barlines
   draw(stave) {
-    stave.checkContext();
+    var ctx = stave.checkContext();
+    ctx.openGroup('stave-barline');
+
     this.setRendered();
 
     switch (this.type) {
@@ -152,6 +154,8 @@ export class Barline extends StaveModifier {
         // Default is NONE, so nothing to draw
         break;
     }
+
+    ctx.closeGroup();
   }
 
   drawVerticalBar(stave, x, double_bar) {

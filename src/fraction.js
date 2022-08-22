@@ -53,7 +53,7 @@ export class Fraction {
     }
   }
 
-  constructor(numerator, denominator) {
+  constructor(numerator, denominator) {// 分子， 分母
     this.set(numerator, denominator);
   }
   set(numerator, denominator) {

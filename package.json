@@ -52,6 +52,7 @@
   },
   "scripts": {
     "start": "grunt stage",
+    "build": "grunt webpack:build && cp -r ./build/vexflow-debug.js ./releases/vexflow-debug.js && cp -r ./build/vexflow-debug.js.map ./releases/vexflow-debug.js.map",
     "lint": "grunt eslint",
     "qunit": "grunt test",
     "generate:current": "node ./tools/generate_png_images.js ../build ./build/images/current",
