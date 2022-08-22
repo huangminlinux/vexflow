@@ -148,6 +148,15 @@ const getInitialOffset = (note, position) => {
   }
 };
 
+const FingerFontId = {
+  f0: '0',
+  f1: '1',
+  f2: '2',
+  f3: '3',
+  f4: '4',
+  f5: '5',
+};
+
 export class Articulation extends Modifier {
   static get CATEGORY() { return 'articulations'; }
   static get INITIAL_OFFSET() { return -0.5; }
@@ -231,6 +240,10 @@ export class Articulation extends Modifier {
     this.note = null;
     this.index = null;
     this.type = type;
+
+    if (FingerFontId[type] != null) {
+      this.draw_text = FingerFontId[type];
+    }
     this.position = BELOW;
     this.render_options = {
       font_scale: 38,
@@ -305,7 +318,13 @@ export class Articulation extends Modifier {
     }
 
     L(`Rendering articulation at (x: ${x}, y: ${y})`);
-
-    glyph.render(ctx, x, y);
+    
+    if (this.draw_text) {
+      
+      const metrics = ctx.measureText(this.draw_text);
+      ctx.fillText(this.fingerNumber,x - metrics.width/2,y);
+    } else {
+      glyph.render(ctx, x, y);
+    }
   }
 }
