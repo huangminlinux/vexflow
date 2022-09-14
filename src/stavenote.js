@@ -333,6 +333,9 @@ export class StaveNote extends StemmableNote {
     this.note_heads = [];
     this.modifiers = [];
 
+    // for dot get covered by other notehead
+    this.voice2Note;
+
     Vex.Merge(this.render_options, {
       // font size for note heads and rests
       glyph_font_scale: noteStruct.glyph_font_scale || Flow.DEFAULT_NOTATION_FONT_SCALE,
