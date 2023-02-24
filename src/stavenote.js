@@ -127,7 +127,7 @@ export class StaveNote extends StemmableNote {
     const voiceXShift = Math.max(noteU.voice_shift, noteL.voice_shift);
     let xShift = 0;
     let stemDelta;
-
+    let isNearNote = false; //两个声部是否只差挨着 一个在线上 一个在线外 如 D和E
     // Test for two voice note intersection
     if (voices === 2) {
       const lineSpacing = noteU.stemDirection === noteL.stemDirection ? 0.0 : 0.5;
