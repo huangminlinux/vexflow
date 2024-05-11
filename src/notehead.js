@@ -80,6 +80,8 @@ export class NoteHead extends Note {
     this.displaced = head_options.displaced || false;
     this.stem_direction = head_options.stem_direction || StaveNote.STEM_UP;
     this.line = head_options.line;
+    this.note_head_highlight_point_color = head_options.note_head_highlight_point_color;
+
 
     // Get glyph code based on duration and note type. This could be
     // regular notes, rests, or other custom codes.
@@ -189,6 +191,7 @@ export class NoteHead extends Note {
     this.setRendered();
 
     const ctx = this.context;
+    ctx.save();
     const head_x = this.getAbsoluteX();
     const y = this.y;
 
@@ -197,7 +200,7 @@ export class NoteHead extends Note {
     // Begin and end positions for head.
     const stem_direction = this.stem_direction;
     const glyph_font_scale = this.render_options.glyph_font_scale;
-
+    
     if (this.style) {
       this.applyStyle(ctx);
     }
@@ -207,6 +210,23 @@ export class NoteHead extends Note {
       drawSlashNoteHead(ctx, this.duration, head_x, y, stem_direction, staveSpace);
     } else {
       Glyph.renderGlyph(ctx, head_x, y, glyph_font_scale, this.glyph_code);
+      if ( this.glyph_code === 'vb' && this.note_head_highlight_point_color) {
+
+        ctx.beginPath();
+        const oldFill = ctx.attributes.fill;
+        ctx.setFillStyle(this.note_head_highlight_point_color);
+        if (this.stem_direction == StaveNote.STEM_UP) {
+
+          ctx.arc(head_x + this.width* 25 /100, y + this.width*1/10, this.width* 15 /100, 0, Math.PI * 2, true);
+        } else {
+          ctx.arc(head_x + this.width* 75 /100, y - this.width*1.5/10, this.width* 15 /100, 0, Math.PI * 2, true);
+
+        }
+        ctx.fill();
+        ctx.stroke();
+        ctx.setFillStyle(oldFill); 
+      }
+
     }
 
     if (this.style) {

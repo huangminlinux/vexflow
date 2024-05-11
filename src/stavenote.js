@@ -298,6 +298,7 @@ export class StaveNote extends StemmableNote {
   }
 
   constructor(noteStruct) {
+    
     super(noteStruct);
     this.setAttribute('type', 'StaveNote');
 
@@ -332,7 +333,8 @@ export class StaveNote extends StemmableNote {
     // Drawing
     this.note_heads = [];
     this.modifiers = [];
-
+    this.note_head_highlight_point_color = noteStruct.note_head_highlight_point_color;
+    
     Vex.Merge(this.render_options, {
       // font size for note heads and rests
       glyph_font_scale: noteStruct.glyph_font_scale || Flow.DEFAULT_NOTATION_FONT_SCALE,
@@ -358,6 +360,7 @@ export class StaveNote extends StemmableNote {
 
     // Save prior noteHead styles & reapply them after making new noteheads.
     const noteHeadStyles = this.note_heads.map(noteHead => noteHead.getStyle());
+
     this.buildNoteHeads();
     this.note_heads.forEach((noteHead, index) => noteHead.setStyle(noteHeadStyles[index]));
 
@@ -440,6 +443,7 @@ export class StaveNote extends StemmableNote {
         glyph_font_scale: this.render_options.glyph_font_scale,
         x_shift: noteProps.shift_right,
         line: noteProps.line,
+        note_head_highlight_point_color: this.note_head_highlight_point_color,
       });
 
       this.note_heads[i] = notehead;
