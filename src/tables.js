@@ -1114,8 +1114,9 @@ Flow.smufl.to_code_points = {
   articStaccatoAbove: 'v23', // = dot
   articStaccatoBelow: 'v23', // = dot
   articStaccatissimoAbove: 'v28',
-  articMarcatoAbove: 'va',
-
+  articStaccatissimoBelow: 'v28',
+  articMarcatoAbove: 'v5a',
+  articMarcatoBelow: 'v8a',
   // holds and pauses (e4c0-e4df)
   fermataAbove: 'v43',
   fermataBelow: 'v5b',

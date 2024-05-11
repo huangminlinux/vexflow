@@ -107,6 +107,8 @@ export class Stave extends Element {
   }
   setY(y) { this.y = y; return this; }
 
+  getY() {return this.y}
+
   getTopLineTopY() {
     return this.getYForLine(0) - (Flow.STAVE_LINE_THICKNESS / 2);
   }

@@ -333,8 +333,14 @@ export class StaveNote extends StemmableNote {
     // Drawing
     this.note_heads = [];
     this.modifiers = [];
+
     this.note_head_highlight_point_color = noteStruct.note_head_highlight_point_color;
     
+
+    // for dot get covered by other notehead
+    this.voice2Note;
+    this.isNearNote; //is two notehead only diff one key
+
     Vex.Merge(this.render_options, {
       // font size for note heads and rests
       glyph_font_scale: noteStruct.glyph_font_scale || Flow.DEFAULT_NOTATION_FONT_SCALE,
